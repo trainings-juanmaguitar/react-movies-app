@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Grid } from 'react-bootstrap'
 
 import Navbar from './Navbar'
 import Main from './Main'
@@ -11,9 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar></Navbar>
-        <Grid>
-          <Main />
-        </Grid>
+        <Main />
       </div>
     );
   }
