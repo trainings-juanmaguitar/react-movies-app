@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Thumbnail } from 'react-bootstrap'
+import { Grid, Thumbnail } from 'react-bootstrap'
 import { findMovies } from '../services/moviesApi'
 
 import './SearchResults.css'
-
-import SearchForm from './SearchForm'
 
 class SearchResults extends Component {
 
@@ -40,10 +38,7 @@ class SearchResults extends Component {
     const { movies, query } = this.state
     console.log(movies);
     return (
-      <div className="SearchResults">
-        <div className="search-box">
-          <SearchForm />
-        </div>
+      <Grid className="SearchResults">
         <h1>Search Results for <strong>{ query }</strong></h1>
         <div className="list-movies">
         {
@@ -55,7 +50,7 @@ class SearchResults extends Component {
           ))
         }
         </div>
-      </div>
+      </Grid>
     )
   }
 }

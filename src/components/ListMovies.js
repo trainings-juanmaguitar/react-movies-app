@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Thumbnail } from 'react-bootstrap'
+import { Grid, Thumbnail } from 'react-bootstrap'
 
 import { getMoviesBySection } from '../services/moviesApi'
 import { capitalize } from '../utils'
@@ -39,7 +39,7 @@ class ListMovies extends Component {
   render() {
     const sectionTitle = capitalize(this.state.section.split('_').join(' '))
     return (
-      <div>
+      <Grid>
         <h1>{ sectionTitle } Movies </h1>
         <div className="list-movies">
         {
@@ -51,7 +51,7 @@ class ListMovies extends Component {
           ))
         }
         </div>
-      </div>
+      </Grid>
     )
   }
 }

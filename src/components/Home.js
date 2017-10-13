@@ -13,9 +13,9 @@ const Home = () => {
       <div className="cover">
         <Grid>
           <div className="search-box">
-            <img src={ logoSrc }/>
+            <img src={ logoSrc } alt='logo app' />
             <h3>Look for your favourites movies with our app</h3>
-            <SearchForm />
+            <SearchForm size="lg"/>
           </div>
         </Grid>    
       </div>

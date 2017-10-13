@@ -36,7 +36,7 @@ class SearchForm extends Component {
     return (
       <form  className="SearchForm" onSubmit={ this.handleSubmit }>
         <FormGroup>
-          <InputGroup bsSize='lg'>
+          <InputGroup bsSize={this.props.size}>
             <FormControl 
               type="text" 
               onChange={this.handleChange}
