@@ -9,12 +9,12 @@ import './Home.css'
 const Home = () => {
   return (
     <div className="Home">
-      <div className="curtain"></div>
-      <div className="cover">
-        <Grid>
-          <div className="search-box">
+      <div className="Home__curtain"></div>
+      <div className="Home__cover">
+        <Grid className="Home__grid">
+          <div className="Home__search-box">
             <img src={ logoSrc } alt='logo app' />
-            <h3>Look for your favourites movies with our app</h3>
+            <h3 className="Home__h3">Look for your favourites movies with our app</h3>
             <SearchForm size="lg"/>
           </div>
         </Grid>    

@@ -14,7 +14,6 @@ class SearchForm extends Component {
   }
 
   componentWillReceiveProps() {
-    console.log('componentWillReceiveProps...')
     this.setState({ 
       value: '',
       fireRedirect: false
@@ -28,7 +27,6 @@ class SearchForm extends Component {
   handleSubmit(e) {
     e.preventDefault()
     this.setState({ fireRedirect: true })
-    console.log(this.state.value);
   }
 
   render() {
