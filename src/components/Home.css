@@ -1,5 +1,8 @@
 .Home {
   background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2013/12/26/205901/e0389e2031c3b353637bb0c3c5739117.jpg');
+}
+.Home .cover {
+  background-color: rgba(0,0,0,.5);
   background-size: cover;
   background-position: center center;
   height: 100vh;
@@ -12,7 +15,14 @@
   width: 100vw;
 }
 
-.Home .container form {
-  margin-top: 300px;
+.Home .container .search-box {
+  margin-top: 100px;
   max-width: 800px;
+}
+
+.Home .container .search-box h1 {
+  font-family: 'Encode Sans Expanded', sans-serif;
+  margin-bottom: 50px;
+  color: white;
+  font-size: 60px;
 }

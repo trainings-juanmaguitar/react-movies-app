@@ -14,7 +14,10 @@ class SearchForm extends Component {
   }
 
   componentWillReceiveProps() {
-    this.setState({ fireRedirect: false })
+    this.setState({ 
+      value: '',
+      fireRedirect: false
+    })
   }
   
   handleChange(e) {
@@ -29,8 +32,6 @@ class SearchForm extends Component {
 
   render() {
     const { fireRedirect, value: query } = this.state
-    console.log(fireRedirect)
-    console.log(query)
     return (
       <form  onSubmit={ this.handleSubmit }>
         <FormGroup>

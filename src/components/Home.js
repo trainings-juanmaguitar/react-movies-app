@@ -7,9 +7,14 @@ import './Home.css'
 const Home = () => {
   return (
     <div className="Home">
-      <Grid>
-        <SearchForm />
-      </Grid>    
+      <div className="cover">
+        <Grid>
+          <div className="search-box">
+            <h1>Look for your favourites movies with our app</h1>
+            <SearchForm />
+          </div>
+        </Grid>    
+      </div>
     </div>
   );
 }
