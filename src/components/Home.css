@@ -1,13 +1,23 @@
 .Home {
-  background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2013/12/26/205901/e0389e2031c3b353637bb0c3c5739117.jpg');
 }
+
 .Home .cover {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,.5);
+}
+.Home .curtain {
+  position: absolute;
+  background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2013/12/26/205901/e0389e2031c3b353637bb0c3c5739117.jpg');
+  filter: blur(5px);
   background-color: rgba(0,0,0,.5);
   background-size: cover;
   background-position: center center;
   height: 100vh;
   width: 100vw;
+  z-index: -2;
 }
+
 .Home .container {
   display: flex;
   justify-content: center;
@@ -20,9 +30,9 @@
   max-width: 800px;
 }
 
-.Home .container .search-box h1 {
+.Home .container .search-box h3 {
   font-family: 'Encode Sans Expanded', sans-serif;
   margin-bottom: 50px;
   color: white;
-  font-size: 60px;
+  font-size: 30px;
 }

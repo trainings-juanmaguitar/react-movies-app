@@ -1,0 +1,11 @@
+.SearchResults .SearchForm {
+  margin: 15px 0;
+  max-width: 800px;
+}
+
+.SearchResults .search-box {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
