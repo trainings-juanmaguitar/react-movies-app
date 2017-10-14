@@ -18,12 +18,13 @@ class App extends Component {
 
   addSearch(query) {
     this.setState({
-      searches: [ ...this.state.searches, query ]
+      searches: [...this.state.searches, query ]
     })
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.searches.length !== nextState.searches.length) {
+    const { searches } = this.state
+    if (searches.length !== nextState.searches.length) {
       return false
     }
     return true;
