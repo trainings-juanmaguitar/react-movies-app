@@ -20,9 +20,9 @@ const Home = props => {
             {
               !!props.searches.length && 
               <div className="Home__latest-searches lead">
-                <p className="Home__latest-searches-p">Latest Searches:</p>
+                <p className="Home__latest-searches-p">10 Latest Searches:</p>
                 <ul className="list-inline">
-                  { Array.from(new Set(props.searches)).map( query => (
+                  { props.searches.map( query => (
                     <li key={ query }><Link to={`/search/${query}`}>{query}</Link></li>
                     )) 
                   }

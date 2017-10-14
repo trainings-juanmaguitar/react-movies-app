@@ -10,31 +10,20 @@ import './App.css';
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      searches: ['indiana', 'future']
-    }
+    this.searches = ['indiana', 'future']
     this.addSearch = this.addSearch.bind(this)
   }
 
   addSearch(query) {
-    this.setState({
-      searches: [...this.state.searches, query ]
-    })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const { searches } = this.state
-    if (searches.length !== nextState.searches.length) {
-      return false
-    }
-    return true;
+    this.searches = Array.from( new Set([...this.searches, query ]) )
+    if (this.searches.length > 10) this.searches.shift()
   }
 
   render() {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' render={ () => <Home searches={ this.state.searches }/> } />
+          <Route exact path='/' render={ () => <Home searches={ this.searches }/> } />
           <Route render={ () => (
             <div>
               <Navbar />
