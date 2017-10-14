@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap'
 
+import './SearchForm.css'
+
 class SearchForm extends Component {
   constructor() {
     super()
@@ -42,7 +44,7 @@ class SearchForm extends Component {
               autoFocus
             />
             <InputGroup.Button>
-              <Button>Find Movie!</Button>
+              <Button type="submit" className="SearchForm__button">Find Movie!</Button>
             </InputGroup.Button>
           </InputGroup>
         </FormGroup>

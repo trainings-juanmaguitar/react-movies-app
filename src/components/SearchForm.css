@@ -1,0 +1,10 @@
+.SearchForm__button {
+  color: white;
+  background: #030303;
+  font-weight: bold;
+}
+
+.SearchForm__button:hover {
+  color: #18bc9c;
+  background: #030303;
+}

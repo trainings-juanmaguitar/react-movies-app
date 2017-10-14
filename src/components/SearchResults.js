@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Thumbnail } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import { findMovies } from '../services/moviesApi'
 
 import './SearchResults.css'
