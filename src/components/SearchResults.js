@@ -19,7 +19,9 @@ class SearchResults extends Component {
 
   getMovies(query) {
     findMovies(query)
-      .then(movies => this.setState({ movies, query }))
+      .then(movies => {
+        this.setState({ movies, query })
+      } , this.props.addSearch(query) )
   }
 
   componentWillReceiveProps( nextProps ) {

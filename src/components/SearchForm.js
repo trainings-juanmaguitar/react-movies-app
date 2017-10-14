@@ -5,8 +5,8 @@ import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap'
 import './SearchForm.css'
 
 class SearchForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       value: '',
       fireRedirect: false

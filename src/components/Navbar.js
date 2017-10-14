@@ -6,7 +6,7 @@ import SearchForm from './SearchForm'
 
 import './Navbar.css'
 
-const _Navbar = () => (
+const _Navbar = props => (
   <Navbar>
     <Navbar.Header>
       <LinkContainer to='/'>
@@ -30,7 +30,7 @@ const _Navbar = () => (
       </LinkContainer>
     </Nav>
     <Navbar.Form pullLeft>
-      <SearchForm />
+      <SearchForm addSearch={ props.addSearch } />
     </Navbar.Form>
   </Navbar>
 )

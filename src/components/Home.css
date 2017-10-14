@@ -1,10 +1,10 @@
-.Home__cover {
+.Home__curtain {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0,0,0,.5);
 }
 
-.Home__curtain {
+.Home__cover {
   position: absolute;
   background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2013/12/26/205901/e0389e2031c3b353637bb0c3c5739117.jpg');
   filter: blur(5px);
@@ -33,4 +33,14 @@
   margin-bottom: 50px;
   color: white;
   font-size: 30px;
+}
+
+.Home__latest-searches {
+  display:flex;
+  font-size:20px;
+  color: white;
+}
+
+.Home__latest-searches-p {
+  margin-right: 20px;
 }
