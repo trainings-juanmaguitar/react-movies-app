@@ -1,11 +1,12 @@
 .MoviesList  {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .MoviesList__thumbnail {
   max-width: 200px;
+  margin-right: 25px;
 }
 
 @media (max-width: 500px) {

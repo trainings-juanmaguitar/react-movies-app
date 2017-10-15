@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Grid, Pagination } from 'react-bootstrap'
 import { findMovies } from '../services/moviesApi'
 
@@ -23,9 +22,9 @@ class SearchResults extends Component {
   }
 
   getMovies(query, page) {
+    page = page ? +page : 1
     findMovies(query, page)
       .then(response => {
-        console.log(response);
         const { results: movies, total_results: totalResults, total_pages: totalPages } = response
         console.log({ movies, query, page, totalResults, totalPages });
         this.setState({ movies, query, page, totalResults, totalPages })
@@ -35,27 +34,29 @@ class SearchResults extends Component {
   handleSelectPage(page) {
     const urlToRedirect = `/search/${this.state.query}/page/${page}`
     this.props.history.push(urlToRedirect) 
-    this.getMovies(this.state.query, page)
+    //this.getMovies(this.state.query, page)
   }
 
   componentWillReceiveProps( nextProps ) {
-    const { query: nextQuery, pageNumber } = nextProps.match.params
-    if (this.state.query !== nextQuery) {
-      this.getMovies(nextQuery, pageNumber)
+    let { query: nextQuery, pageNumber: nextPage } = nextProps.match.params
+    const isDifferentQuery = this.state.query !== nextQuery
+    const isDifferentPage = this.state.page !== nextPage
+    if (isDifferentQuery || isDifferentPage ) {
+      this.getMovies(nextQuery, nextPage )
     }
   }
 
   componentDidMount() {
-    console.log(this.props.match.params);
     const { query, pageNumber } = this.props.match.params
     this.getMovies(query, pageNumber)
   }
 
   render() {
-    const { movies, query, page, totalPages } = this.state
+    const { movies, query, page, totalResults, totalPages } = this.state
     return (
       <Grid className="SearchResults">
-        <h1>Search Results for <strong>{ query }</strong></h1>
+        <h1>Found { totalResults } movies for: <strong>"{ query }"</strong></h1>
+        <h4>Showing results from { page*20-20+1 } to { page === totalPages ? totalResults : page*20 }</h4>
         <Pagination
           prev
           next
@@ -73,12 +74,6 @@ class SearchResults extends Component {
     )
   }
 }
-
-SearchResults.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 
 export default SearchResults

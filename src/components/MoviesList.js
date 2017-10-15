@@ -6,7 +6,6 @@ import './MoviesList.css'
 const srcImgError = "http://www.kalahandi.info/wp-content/uploads/2016/05/sorry-image-not-available.png"
 
 const MoviesList = props => {
-  
   return (
     <div className="MoviesList">
         {

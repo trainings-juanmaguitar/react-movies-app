@@ -23,7 +23,9 @@ const Home = props => {
                 <p className="Home__latest-searches-p">10 Latest Searches:</p>
                 <ul className="list-inline">
                   { props.searches.map( query => (
-                    <li key={ query }><Link to={`/search/${query}`}>{query}</Link></li>
+                    <li key={ query }>
+                      <Link className="Home__latest-searches-link" to={`/search/${query}`}>{query}</Link>
+                    </li>
                     )) 
                   }
                 </ul>
