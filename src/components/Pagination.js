@@ -9,7 +9,7 @@ const _Pagination = props => {
         Found { totalResults } movies
         {
           query &&
-          <span>for: <strong>"{ query }"</strong></span>
+          <span> for: <strong>"{ query }"</strong></span>
         }
         
       </h1>
