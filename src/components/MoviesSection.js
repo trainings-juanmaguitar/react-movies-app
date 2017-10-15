@@ -30,6 +30,7 @@ class MoviesSection extends Component {
   }
 
   componentWillReceiveProps( nextProps ) {
+    console.log('MoviesSection:componentWillReceiveProps...')
     const nextSection = nextProps.match.params[0]
     if (this.state.section !== nextSection) {
       this.getMovies(nextSection)
@@ -37,6 +38,7 @@ class MoviesSection extends Component {
   }
 
   componentDidMount() {
+    console.log('MoviesSection:componentDidMount...')
     const section = this.props.match.params[0]
     this.getMovies(section)
   }
@@ -48,7 +50,10 @@ class MoviesSection extends Component {
     const sectionTitle = capitalize(section.split('_').join(' '))
     return (
       <Grid className="MoviesSection">
-        <h1><Glyphicon glyph={ this.icons[section] } /> { sectionTitle } Movies </h1>
+        {
+          section &&
+          <h1><Glyphicon glyph={ this.icons[section] } /> { sectionTitle } Movies </h1>
+        }
         <MoviesList movies={ movies } />
       </Grid>
     )

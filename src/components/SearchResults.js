@@ -25,6 +25,7 @@ class SearchResults extends Component {
   }
 
   componentWillReceiveProps( nextProps ) {
+    console.log('componentWillReceiveProps...');
     const { query: nextQuery } = nextProps.match.params
     if (this.state.query !== nextQuery) {
       this.getMovies(nextQuery)
@@ -32,6 +33,7 @@ class SearchResults extends Component {
   }
 
   componentDidMount( ) {
+    console.log('componentDidMount...');
     const { query } = this.props.match.params
     this.getMovies(query)
   }
