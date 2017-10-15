@@ -11,6 +11,7 @@ class MoviesSection extends Component {
     super()
     this.state = {
       section: '',
+      page: 1,
       movies: []
     }
     this.icons = {
@@ -24,13 +25,13 @@ class MoviesSection extends Component {
 
   getMovies(section) {
     getMoviesBySection(section)
-      .then(movies => {
+      .then(response => {
+        const movies = response.results
         this.setState({ movies, section })
       })
   }
 
   componentWillReceiveProps( nextProps ) {
-    console.log('MoviesSection:componentWillReceiveProps...')
     const nextSection = nextProps.match.params[0]
     if (this.state.section !== nextSection) {
       this.getMovies(nextSection)
@@ -38,15 +39,12 @@ class MoviesSection extends Component {
   }
 
   componentDidMount() {
-    console.log('MoviesSection:componentDidMount...')
     const section = this.props.match.params[0]
     this.getMovies(section)
   }
 
   render() {
     const { section, movies } = this.state
-    console.log(section)
-    console.log(this.icons[section] )
     const sectionTitle = capitalize(section.split('_').join(' '))
     return (
       <Grid className="MoviesSection">

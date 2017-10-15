@@ -7,7 +7,7 @@ import SearchForm from './SearchForm'
 import './Navbar.css'
 
 const _Navbar = props => (
-  <Navbar className="Navbar">
+  <Navbar className="Navbar" fixedTop>
     <Navbar.Header>
       <LinkContainer to='/'>
         <Navbar.Brand className="Navbar__app-title">MovieFinder</Navbar.Brand>

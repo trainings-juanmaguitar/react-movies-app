@@ -6,7 +6,7 @@ function capitalize( text ) {
 
 const getAndCache = (function () {
   const cache = {}
-  return (url, keyCache) => {
+  return (keyCache, url) => {
     if (cache[keyCache]) {
       console.log('💾 from cache...');
       return new Promise( (resolve, reject) => {
@@ -14,7 +14,7 @@ const getAndCache = (function () {
       })
     }
     return axios.get(url)
-      .then(response => response.data && response.data.results)
+      .then(response => response.data )
       .then(data => {
         console.log('🔎 fresh request...');
         cache[keyCache] = data 
