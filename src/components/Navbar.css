@@ -1,7 +1,7 @@
-.title-app {
-  cursor: pointer;
+.Navbar {
+  margin-bottom: 0;
 }
 
-.App .navbar {
-  margin-bottom: 0
+.Navbar__app-title {
+  cursor: pointer;
 }

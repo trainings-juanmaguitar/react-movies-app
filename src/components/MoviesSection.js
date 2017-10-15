@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from 'react-bootstrap'
+import { Grid, Glyphicon } from 'react-bootstrap'
 
 import { getMoviesBySection } from '../services/moviesApi'
 import { capitalize } from '../utils'
@@ -12,6 +12,12 @@ class MoviesSection extends Component {
     this.state = {
       section: '',
       movies: []
+    }
+    this.icons = {
+      'popular': 'flash',
+      'upcoming': 'film',
+      'now_playing': 'expand',
+      'top_rated': 'thumbs-up'
     }
     this.getMovies = this.getMovies.bind(this)
   }
@@ -37,10 +43,12 @@ class MoviesSection extends Component {
 
   render() {
     const { section, movies } = this.state
+    console.log(section)
+    console.log(this.icons[section] )
     const sectionTitle = capitalize(section.split('_').join(' '))
     return (
       <Grid className="MoviesSection">
-        <h1>{ sectionTitle } Movies </h1>
+        <h1><Glyphicon glyph={ this.icons[section] } /> { sectionTitle } Movies </h1>
         <MoviesList movies={ movies } />
       </Grid>
     )

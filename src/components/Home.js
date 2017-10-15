@@ -14,9 +14,9 @@ const Home = props => {
       <div className="Home__curtain">
         <Grid className="Home__grid">
           <div className="Home__search-box">
-            <img src={ logoSrc } alt='logo app' />
+            <img src={ logoSrc } className="img-responsive" alt='logo app' />
             <h3 className="Home__h3">Look for your favourites movies with our app</h3>
-            <SearchForm addSearch={props.addSearch} size="lg" />
+            <SearchForm addSearch={props.addSearch} />
             {
               !!props.searches.length && 
               <div className="Home__latest-searches lead">

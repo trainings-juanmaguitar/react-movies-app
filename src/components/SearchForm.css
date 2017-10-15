@@ -1,3 +1,7 @@
+.SearchForm {
+  width:100%;
+}
+
 .SearchForm__button {
   color: white;
   background: #030303;

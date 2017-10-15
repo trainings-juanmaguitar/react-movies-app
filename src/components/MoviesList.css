@@ -7,3 +7,9 @@
 .MoviesList__thumbnail {
   max-width: 200px;
 }
+
+@media (max-width: 500px) {
+  .MoviesList__thumbnail {
+    max-width: 100%;
+  } 
+}

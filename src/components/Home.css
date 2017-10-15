@@ -24,7 +24,7 @@
 }
 
 .Home__search-box {
-  margin-top: 200px;
+  margin-top: 20vh;
   max-width: 800px;
 }
 
@@ -32,12 +32,12 @@
   font-family: 'Encode Sans Expanded', sans-serif;
   margin-bottom: 50px;
   color: white;
-  font-size: 30px;
+  font-size: 30wh;
 }
 
 .Home__latest-searches {
   display:flex;
-  font-size:20px;
+  font-size:20wh;
   color: white;
 }
 
