@@ -1,12 +1,16 @@
 import React from 'react';
-import { Grid } from 'react-bootstrap'
+import { Grid, Button, Glyphicon } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
+import { capitalize } from '../utils'
+import { iconsSections } from '../config'
 
 import SearchForm from './SearchForm';
 import logoSrc from '../img/logo-movie-finder-white.png'
 
 import './Home.css'
 
+console.log(iconsSections);
 const Home = props => {
   return (
     <div className="Home">
@@ -31,9 +35,24 @@ const Home = props => {
                 </ul>
               </div>
             }
-            
-            
-            
+            <div>
+            {
+              Object.entries(iconsSections).map( sectionIcon => {
+                const sectionTitle = capitalize(sectionIcon[0].split('_').join(' ')) 
+                return (
+                  <Link to={ `/${sectionIcon[0]}` }>
+                    <Button 
+                      key={sectionIcon[0]} 
+                      className="Home__section-button"
+                    >
+                      <Glyphicon glyph={ sectionIcon[1] } />
+                      &nbsp;{ sectionTitle }
+                    </Button>
+                  </Link>
+                )
+              })
+            }
+            </div>
           </div>
         </Grid>    
       </div>

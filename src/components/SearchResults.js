@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Grid, Pagination } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import { findMovies } from '../services/moviesApi'
 
 import './SearchResults.css'
 
 import MoviesList from './MoviesList'
+import Pagination from './Pagination'
 
 class SearchResults extends Component {
 
@@ -55,19 +56,12 @@ class SearchResults extends Component {
     const { movies, query, page, totalResults, totalPages } = this.state
     return (
       <Grid className="SearchResults">
-        <h1>Found { totalResults } movies for: <strong>"{ query }"</strong></h1>
-        <h4>Showing results from { page*20-20+1 } to { page === totalPages ? totalResults : page*20 }</h4>
-        <Pagination
-          prev
-          next
-          first
-          last
-          ellipsis
-          boundaryLinks
-          items={ totalPages }
-          maxButtons={5}
-          activePage={ page }
-          onSelect={ this.handleSelectPage } 
+        <Pagination 
+          totalPages={totalPages}
+          totalResults={totalResults}
+          page={page}
+          handleSelectPage={ this.handleSelectPage } 
+          query={ query } 
         />
         <MoviesList movies={ movies }/>
       </Grid>

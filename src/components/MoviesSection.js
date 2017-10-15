@@ -3,55 +3,70 @@ import { Grid, Glyphicon } from 'react-bootstrap'
 
 import { getMoviesBySection } from '../services/moviesApi'
 import { capitalize } from '../utils'
+import { iconsSections } from '../config'
 
 import MoviesList from './MoviesList'
+import Pagination from './Pagination'
 
 class MoviesSection extends Component {
   constructor() {
     super()
     this.state = {
-      section: '',
+      totalPages: 0,
+      totalResults: 0,
       page: 1,
+      section: '',
       movies: []
     }
-    this.icons = {
-      'popular': 'flash',
-      'upcoming': 'film',
-      'now_playing': 'expand',
-      'top_rated': 'thumbs-up'
-    }
     this.getMovies = this.getMovies.bind(this)
+    this.handleSelectPage = this.handleSelectPage.bind(this)
   }
 
-  getMovies(section) {
-    getMoviesBySection(section)
+  getMovies(section, page) {
+    page = page ? +page : 1
+    getMoviesBySection(section, page)
       .then(response => {
-        const movies = response.results
-        this.setState({ movies, section })
+        const { results: movies, total_results: totalResults, total_pages: totalPages } = response
+        this.setState({ movies, section, page, totalResults, totalPages })
       })
   }
 
+  handleSelectPage(page) {
+    const urlToRedirect = `/${this.state.section}/page/${page}`
+    this.props.history.push(urlToRedirect) 
+    //this.getMovies(this.state.query, page)
+  }
+
   componentWillReceiveProps( nextProps ) {
-    const nextSection = nextProps.match.params[0]
-    if (this.state.section !== nextSection) {
-      this.getMovies(nextSection)
+    let { 0: nextSection, pageNumber: nextPage } = nextProps.match.params
+    const isDifferentSection = this.state.section !== nextSection
+    const isDifferentPage = this.state.page !== nextPage
+    if (isDifferentSection || isDifferentPage ) {
+      this.getMovies(nextSection, nextPage )
     }
   }
 
   componentDidMount() {
-    const section = this.props.match.params[0]
-    this.getMovies(section)
+    console.log(this.props)
+    const { 0: section, pageNumber } = this.props.match.params
+    this.getMovies(section, pageNumber)
   }
 
   render() {
-    const { section, movies } = this.state
+    const { movies, section, page, totalResults, totalPages } = this.state
     const sectionTitle = capitalize(section.split('_').join(' '))
     return (
       <Grid className="MoviesSection">
         {
           section &&
-          <h1><Glyphicon glyph={ this.icons[section] } /> { sectionTitle } Movies </h1>
+          <h1><Glyphicon glyph={ iconsSections[section] } /> { sectionTitle } Movies </h1>
         }
+        <Pagination 
+          totalPages={totalPages}
+          totalResults={totalResults}
+          page={page}
+          handleSelectPage={ this.handleSelectPage } 
+        />
         <MoviesList movies={ movies } />
       </Grid>
     )

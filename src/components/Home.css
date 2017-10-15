@@ -57,3 +57,12 @@
   border-radius: 5px;
   color: #000;
 }
+
+.Home__section-button {
+  background-color: #fa3600;
+  margin-right: 25px;
+}
+
+.Home__section-button:hover {
+  background-color: #d12300;
+}
