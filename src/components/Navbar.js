@@ -3,18 +3,13 @@ import { Navbar, Nav, NavItem, Glyphicon, NavDropdown, Dropdown, MenuItem } from
 import { LinkContainer } from 'react-router-bootstrap'
 
 import SearchForm from './SearchForm'
-import Login from './Login'
 
 import './Navbar.css'
 
 const _Navbar = ({ addSearch, onAuth, onLogout, user }) => {
   let loginBlock
-  console.log('-'.repeat(20))
-  console.log(user);
-  console.log( user && Object.keys(user).length );
-  console.log('-'.repeat(20));
+  
   if (user && Object.keys(user).length) {
-    console.log("LOGGED!!!")
     loginBlock = (
       <NavDropdown title={`Logged as ${user.email}`} id="basic-nav-dropdown" >
         <LinkContainer to='/profile'>
@@ -28,7 +23,6 @@ const _Navbar = ({ addSearch, onAuth, onLogout, user }) => {
       </NavDropdown>
     )
   } else {
-    console.log("NOT LOGGED")
     loginBlock = (
       <NavItem onSelect={ onAuth }  eventKey="logout" >
         <i className='fa fa-google' /> Login con Google
