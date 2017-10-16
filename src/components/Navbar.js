@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, NavItem, Glyphicon, NavDropdown, Dropdown, MenuItem } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, Glyphicon, NavDropdown, MenuItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import SearchForm from './SearchForm'

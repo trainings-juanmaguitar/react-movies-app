@@ -45,7 +45,7 @@ class App extends Component {
 
       // cleaner version of the user object to not add useless props to the state
       const user = cleanFirebaseUserObject({...loggedUser})
-      
+
       if (user && Object.keys(user).length ) {
         this.setState({ user })
       } else {
@@ -66,7 +66,7 @@ class App extends Component {
                 onAuth={this.handleOnAuth} 
                 user={ this.state.user } 
               />
-              <Main addSearch={ this.addSearch }/>
+              <Main user={ this.state.user } addSearch={ this.addSearch }/>
             </div>
           ) }></Route>
         </Switch>
