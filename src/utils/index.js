@@ -4,6 +4,14 @@ function capitalize( text ) {
   return text.replace(/(?:^|\s)\S/g, word => word.toUpperCase() )
 }
 
+function cleanFirebaseUserObject(user) {
+  return Object.keys(user).reduce((cleanedObj, prop) => {
+    if (prop.length <= 2) delete cleanedObj[prop]
+    return cleanedObj
+  }, {...user})
+}
+
+
 const getAndCache = (function () {
   const cache = {}
   return (keyCache, url) => {
@@ -23,4 +31,4 @@ const getAndCache = (function () {
   }
 })()
 
-export { capitalize, getAndCache }
+export { capitalize, cleanFirebaseUserObject, getAndCache }

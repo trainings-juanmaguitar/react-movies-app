@@ -48,6 +48,7 @@
 .Home__latest-searches-link {
   text-shadow: 1px 1px 1px #000;
   padding: 10px;
+  color: #eda287;
 }
 
 .Home__latest-searches-link:hover {
@@ -55,11 +56,11 @@
   text-decoration: none;
   background-color: #fff;
   border-radius: 5px;
-  color: #000;
+  color: #d12300;
 }
 
 .Home__section-button {
-  background-color: #fa3600;
+  background-color: rgba(82,14,0,.5);
   margin-right: 25px;
 }
 

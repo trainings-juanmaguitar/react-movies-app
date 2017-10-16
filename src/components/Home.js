@@ -40,11 +40,8 @@ const Home = props => {
               Object.entries(iconsSections).map( sectionIcon => {
                 const sectionTitle = capitalize(sectionIcon[0].split('_').join(' ')) 
                 return (
-                  <Link to={ `/${sectionIcon[0]}` }>
-                    <Button 
-                      key={sectionIcon[0]} 
-                      className="Home__section-button"
-                    >
+                  <Link key={sectionIcon[0]} to={ `/${sectionIcon[0]}` }>
+                    <Button className="Home__section-button">
                       <Glyphicon glyph={ sectionIcon[1] } />
                       &nbsp;{ sectionTitle }
                     </Button>

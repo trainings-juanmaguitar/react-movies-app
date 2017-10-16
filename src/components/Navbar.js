@@ -1,36 +1,70 @@
 import React from 'react';
-import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, Glyphicon, NavDropdown, Dropdown, MenuItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import SearchForm from './SearchForm'
+import Login from './Login'
 
 import './Navbar.css'
 
-const _Navbar = props => (
-  <Navbar className="Navbar" fixedTop>
-    <Navbar.Header>
-      <LinkContainer to='/'>
-        <Navbar.Brand className="Navbar__app-title">MovieFinder</Navbar.Brand>
-      </LinkContainer>
-    </Navbar.Header>
-    <Nav>
-      <LinkContainer to='/popular'>
-        <NavItem><Glyphicon glyph="flash" /> Popular Movies</NavItem>
-      </LinkContainer>
-      <LinkContainer to='/upcoming'>
-        <NavItem><Glyphicon glyph="film" /> Upcoming Movies</NavItem>
-      </LinkContainer>
-      <LinkContainer to='/now_playing'>
-        <NavItem><Glyphicon glyph="expand" /> Now Playing Movies</NavItem>
-      </LinkContainer>
-      <LinkContainer to='/top_rated'>
-        <NavItem><Glyphicon glyph="thumbs-up" /> Top Rated Movies</NavItem>
-      </LinkContainer>
-    </Nav>
-    <Navbar.Form className="Navbar__search-form" pullRight>
-      <SearchForm addSearch={ props.addSearch } />
-    </Navbar.Form>
-  </Navbar>
-)
+const _Navbar = ({ addSearch, onAuth, onLogout, user }) => {
+  let loginBlock
+  console.log('-'.repeat(20))
+  console.log(user);
+  console.log( user && Object.keys(user).length );
+  console.log('-'.repeat(20));
+  if (user && Object.keys(user).length) {
+    console.log("LOGGED!!!")
+    loginBlock = (
+      <NavDropdown title={`Logged as ${user.email}`} id="basic-nav-dropdown" >
+        <LinkContainer to='/profile'>
+          <MenuItem>
+            <i className='fa fa-user' /> Profile
+          </MenuItem>  
+        </LinkContainer>
+        <MenuItem eventKey="login" onSelect={ onLogout }>
+          <i className='fa fa-sign-out' /> Logout
+        </MenuItem>  
+      </NavDropdown>
+    )
+  } else {
+    console.log("NOT LOGGED")
+    loginBlock = (
+      <NavItem onSelect={ onAuth }  eventKey="logout" >
+        <i className='fa fa-google' /> Login con Google
+      </NavItem>
+    )  
+  }
+    
+  return (
+    <Navbar className="Navbar" fixedTop>
+      <Navbar.Header>
+        <LinkContainer to='/'>
+          <Navbar.Brand className="Navbar__app-title">MovieFinder</Navbar.Brand>
+        </LinkContainer>
+      </Navbar.Header>
+      <Navbar.Form className="Navbar__search-form" pullLeft>
+          <SearchForm addSearch={ addSearch } />
+      </Navbar.Form>
+      <Nav pullRight>
+        <NavDropdown title="Categories" id="basic-nav-dropdown" >
+          <LinkContainer to='/popular'>
+            <MenuItem><Glyphicon glyph="flash" /> Popular Movies</MenuItem>
+          </LinkContainer>
+          <LinkContainer to='/upcoming'>
+            <MenuItem><Glyphicon glyph="film" /> Upcoming Movies</MenuItem>
+          </LinkContainer>
+          <LinkContainer to='/now_playing'>
+            <MenuItem><Glyphicon glyph="expand" /> Now Playing Movies</MenuItem>
+          </LinkContainer>
+          <LinkContainer to='/top_rated'>
+            <MenuItem><Glyphicon glyph="thumbs-up" /> Top Rated Movies</MenuItem>
+          </LinkContainer>
+        </NavDropdown>
+        { loginBlock }
+      </Nav>
+    </Navbar>
+  )
+}
 
 export default _Navbar;
