@@ -16,7 +16,9 @@ const Main = mainProps => {
         <Route exact path='/profile' render={ routeProps => (
           <Profile user={ mainProps.user } { ...routeProps } />
         ) } />
-        <Route exact path='/movie/:idMovie' component={ MovieDetail } />
+        <Route exact path='/movie/:idMovie' render={ routeProps => (
+          <MovieDetail user={ mainProps.user } { ...routeProps } />
+        ) } />
         <Route exact path='/search/:query' render={ routeProps => (
           <SearchResults addSearch={ mainProps.addSearch } { ...routeProps } />
         )} />

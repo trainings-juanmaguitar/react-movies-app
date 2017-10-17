@@ -15,7 +15,12 @@ const getUrlDetailsMovie = idMovie =>
 const getUrlDetailsCompany = idCompany => 
   `${apiUrlBase}/company/${idCompany}?api_key=${apiKey}`
 
+const getUrlCreditsMovie = idMovie => 
+`${apiUrlBase}/movie/${idMovie}/credits?api_key=${apiKey}`
+
 const getUrlImage = (path, size=500) => `https://image.tmdb.org/t/p/w${size}${path}`
+
+// -----------------------------------
 
 function findMovies(query, page=1) {
   const url = getUrlSearch(query, page)
@@ -36,6 +41,13 @@ function getMovieDetails(idMovie) {
   return getAndCache(keyCache, url)
           .then(movieDetails => {
             movie = movieDetails
+            const { id } = movieDetails
+            const url = getUrlCreditsMovie(id)
+            const keyCache = `credits=${id}`
+            return getAndCache(keyCache, url)
+          })
+          .then( movieCredits => {
+            movie.credits = movieCredits
             const logosPromisesRequest = movie.production_companies.map( ({ id }) => {
               const url = getUrlDetailsCompany(id)
               const keyCache = `company=${id}`

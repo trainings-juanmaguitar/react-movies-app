@@ -1,4 +1,35 @@
 /*****************globals*************/
+
+.MovieDetail .details h4 {
+  margin-bottom: 10px;
+}
+
+.MovieDetail .item-block-img > * {
+  margin: 0 auto;
+  text-align: center;
+  display:block;
+}
+
+.MovieDetail .containerSlider {
+  margin: 0 auto 20px;
+  padding: 30px;
+  width: 100%;
+  height: 220px;
+  color: #333;
+  background: #ccc;
+  overflow: hidden;
+  border: 1px solid #bbb; 
+
+}
+
+.MovieDetail h4 {
+  margin: 0
+}
+
+.MovieDetail .vote {
+  margin-top:20px;
+}
+
 .MovieDetail .genres span {
   margin: 0 5px;
   color: #fa3600;
