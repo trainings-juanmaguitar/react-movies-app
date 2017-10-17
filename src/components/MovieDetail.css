@@ -1,4 +1,15 @@
 /*****************globals*************/
+.MovieDetail .genres span {
+  margin: 0 5px;
+  color: #fa3600;
+}
+
+.MovieDetail blockquote {
+  text-align: left;
+  font-style: italic;
+  padding-left: 20px;
+  border-left:5px solid #ccc;
+}
 
 .MovieDetail .preview {
   display: -webkit-box;
@@ -90,17 +101,12 @@
   flex-grow: 1;
 }
 
-.MovieDetail .product-title,
-.MovieDetail .price,
-.MovieDetail .sizes,
-.MovieDetail .colors {
-  text-transform: UPPERCASE;
-  font-weight: bold;
+.MovieDetail .checked {
+  color: #ff9f1a;
 }
 
-.MovieDetail .checked,
 .MovieDetail .price span {
-  color: #ff9f1a;
+  color: #fa3600;
 }
 
 .MovieDetail .product-title,
@@ -135,7 +141,7 @@
   margin-left: 20px;
 }
 
-.MovieDetail .add-to-cart,
+.MovieDetail .add-to-favourites,
 .MovieDetail .like {
   background: #ff9f1a;
   padding: 1.2em 1.5em;
@@ -146,7 +152,7 @@
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
 }
-.MovieDetail .add-to-cart:hover,
+.MovieDetail .add-to-favourites:hover,
 .MovieDetail .like:hover {
   background: #b36800;
   color: #fff;

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid } from 'react-bootstrap'
 
 import { getMovieDetails, getUrlImage } from '../services/moviesApi'
+import { formatPrice } from '../utils'
 
 import './MovieDetail.css'
 
@@ -24,105 +25,102 @@ class MovieDetail extends Component {
   render() {
     const { backdrop_path, budget, genres, original_title, overview, poster_path, production_companies, production_countries, release_date, revenue, runtime, tagline, title, vote_average, vote_count } = this.state.movie
     const imgPath = getUrlImage(poster_path)
+    const yearRelease = release_date && release_date.replace(/([0-9]{4})-.*/, "$1");
+    console.log({ backdrop_path, budget, genres, original_title, overview, poster_path, production_companies, production_countries, release_date, revenue, runtime, tagline, title, vote_average, vote_count });
     return (
-      <Grid className="MovieDetail">
-        <div className="card">
-          <div className="wrapper row">
-            <div className="preview col-md-6">
-              <div className="preview-pic tab-content">
-                <div className="tab-pane active" id="pic-1">
-                  <img alt={ original_title } src={ imgPath } />
+      <div>
+        <div  style={ { 
+          backgroundImage: `url(${getUrlImage(backdrop_path)})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          height: "1100px",
+          width: "100%",
+          filter: "sepia(1)",
+          position: "absolute",
+          zIndex: "-1"
+        } }>
+        </div>
+        <Grid className="MovieDetail" >
+          <div className="card">
+            <div className="wrapper row">
+              <div className="preview col-md-6">
+                <div className="preview-pic tab-content">
+                  <div className="tab-pane active" id="pic-1">
+                    <img alt={ original_title } src={ imgPath } />
+                  </div>
                 </div>
+                <ul className="preview-thumbnail nav nav-tabs">
+                  {
+                    production_companies && production_companies.map(getItemCompany)
+                  }
+                </ul>
               </div>
-              <ul className="preview-thumbnail nav nav-tabs">
-                <li className="active">
-                  <a data-target="#pic-1" data-toggle="tab">
-                    <img alt="aaa" src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-2" data-toggle="tab">
-                    <img alt="aaa" src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-3" data-toggle="tab">
-                    <img alt="aaa" src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-4" data-toggle="tab">
-                    <img alt="aaa" src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-5" data-toggle="tab">
-                    <img alt="aaa" src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="details col-md-6">
-              <h3 className="product-title">{ title }</h3>
-              <div className="rating">
-                <div className="stars">
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star checked" />
-                  <span className="fa fa-star" />
-                  <span className="fa fa-star" />
+              <div className="details col-md-6">
+                <h1 className="product-title">{ title } <small>{ yearRelease }</small></h1>
+                <blockquote>{ tagline }</blockquote>
+                <p className="vote">
+                  <strong>{ vote_average }</strong> is the average rating for this movie!{" "}
+                  <strong>({ vote_count } votes)</strong>
+                </p>
+                <p className="product-description">
+                  { overview }
+                </p>
+                <h4 className="price">
+                  Budget: <span>{ formatPrice(budget) }</span>
+                </h4>
+                <h4 className="price">
+                  Revenue: <span>{ formatPrice(revenue) }</span>
+                </h4>
+                <h4 className="genres">
+                  Genres: 
+                  { genres && genres.map(({ name, id }) => (
+                    <span key={id}>{ name }</span>
+                  ))}
+                </h4>
+                
+                <ul>
+                  
+                </ul>
+                <div className="action">
+                  <button className="add-to-favourites btn btn-default" type="button">
+                    <span className="fa fa-heart" /> Add to favourites
+                  </button>
+                  
                 </div>
-                <span className="review-no">41 reviews</span>
-              </div>
-              <p className="product-description">
-                { overview }
-              </p>
-              <h4 className="price">
-                Budget: <span>{ budget }</span>
-              </h4>
-              <p className="vote">
-                <strong>91%</strong> of buyers enjoyed this product!{" "}
-                <strong>(87 votes)</strong>
-              </p>
-              <h5 className="sizes">
-                sizes:
-                <span className="size" data-toggle="tooltip" title="small">
-                  s
-                </span>
-                <span className="size" data-toggle="tooltip" title="medium">
-                  m
-                </span>
-                <span className="size" data-toggle="tooltip" title="large">
-                  l
-                </span>
-                <span className="size" data-toggle="tooltip" title="xtra large">
-                  xl
-                </span>
-              </h5>
-              <h5 className="colors">
-                colors:
-                <span
-                  className="color orange not-available"
-                  data-toggle="tooltip"
-                  title="Not In store"
-                />
-                <span className="color green" />
-                <span className="color blue" />
-              </h5>
-              <div className="action">
-                <button className="add-to-cart btn btn-default" type="button">
-                  add to cart
-                </button>
-                <button className="like btn btn-default" type="button">
-                  <span className="fa fa-heart" />
-                </button>
               </div>
             </div>
           </div>
-        </div>
-      </Grid>
+        </Grid>
+      </div>
     )
   }
 }
+
+
+function getItemCompany ({ id, homepage, logo_path, name }) {
+  if (homepage && logo_path) return (
+    <li key={id}>
+      <a href={ homepage } target="_blank">
+        <img src={ getUrlImage(logo_path) } alt={name} />
+      </a>
+    </li>
+  )
+  if (logo_path) return (
+    <li key={id}>
+        <img src={ getUrlImage(logo_path) } alt={name} />
+    </li>
+  )
+
+  return (
+    <li key={id}>
+      <a href={ homepage } target="_blank">
+        <img src={ getUrlImage(logo_path) } alt={name} />
+      </a>
+    </li>
+  )
+
+}
+
+
 
 export default MovieDetail;

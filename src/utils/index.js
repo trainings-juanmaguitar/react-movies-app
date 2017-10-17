@@ -4,6 +4,10 @@ function capitalize( text ) {
   return text.replace(/(?:^|\s)\S/g, word => word.toUpperCase() )
 }
 
+function formatPrice (cents) {
+  return `$ ${(cents / 100).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+}
+
 function cleanFirebaseUserObject(user) {
   return Object.keys(user).reduce((cleanedObj, prop) => {
     if (prop.length <= 2) delete cleanedObj[prop]
@@ -30,4 +34,4 @@ const getAndCache = (function () {
   }
 })()
 
-export { capitalize, cleanFirebaseUserObject, getAndCache }
+export { capitalize, formatPrice, cleanFirebaseUserObject, getAndCache }

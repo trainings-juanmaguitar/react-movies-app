@@ -9,8 +9,11 @@ const getUrlBySection = (section, page) =>
 const getUrlSearch = (query, page) => 
   `${apiUrlBase}/search/movie?query=${query}&page=${page}&api_key=${apiKey}`
 
-const getUrlDetailsMovie = (idMovie) => 
+const getUrlDetailsMovie = idMovie => 
   `${apiUrlBase}/movie/${idMovie}?api_key=${apiKey}`
+
+const getUrlDetailsCompany = idCompany => 
+  `${apiUrlBase}/company/${idCompany}?api_key=${apiKey}`
 
 const getUrlImage = (path, size=500) => `https://image.tmdb.org/t/p/w${size}${path}`
 
@@ -29,7 +32,21 @@ function getMoviesBySection(section, page=1) {
 function getMovieDetails(idMovie) {
   const url = getUrlDetailsMovie(idMovie)
   const keyCache = `movie=${idMovie}`
+  let movie = {}
   return getAndCache(keyCache, url)
+          .then(movieDetails => {
+            movie = movieDetails
+            const logosPromisesRequest = movie.production_companies.map( ({ id }) => {
+              const url = getUrlDetailsCompany(id)
+              const keyCache = `company=${id}`
+              return getAndCache(keyCache, url)
+            })
+            return Promise.all(logosPromisesRequest)
+          })
+          .then( companiesDetails => {
+            movie.production_companies = companiesDetails
+            return movie
+          })
 }
 
 export { getMoviesBySection, getMovieDetails, findMovies, getUrlImage }
