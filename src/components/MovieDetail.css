@@ -4,6 +4,10 @@
   margin-bottom: 10px;
 }
 
+.MovieDetail .item-block-img {
+  height: 150px;
+}
+
 .MovieDetail .item-block-img > * {
   margin: 0 auto;
   text-align: center;

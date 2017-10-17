@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 function capitalize( text ) {
   return text.replace(/(?:^|\s)\S/g, word => word.toUpperCase() )
@@ -34,4 +35,30 @@ const getAndCache = (function () {
   }
 })()
 
-export { capitalize, formatPrice, cleanFirebaseUserObject, getAndCache }
+const makeFnSortArray = ( ...criteria ) => {
+  
+   const order = criteria.reduce( ( o, item, i) => {
+     o[item] = ++i; 
+     return o;
+   }, {})
+   
+   return (a, b) => {
+     if ( (order[b] && !order[a]) || order[a] > order[b] ) return 1;
+     if ( (order[a] && !order[b]) || (order[a] < order[b]) ) return -1;
+     if ( a > b ) return 1;
+     if ( a < b ) return -1;
+     return 0;
+   }
+ }
+
+function orderByCriteria( arrayToOrder, fieldToSort, aSortOrder ) {
+  const sortFn = makeFnSortArray(...aSortOrder)
+  const groupedObject = _.groupBy(arrayToOrder, fieldToSort) 
+  const orderedKeys = Object.keys(groupedObject).sort(sortFn)
+  return orderedKeys.reduce( (acc, key) => {
+    acc.push( ...groupedObject[key] )
+    return acc
+  },[])
+}
+
+export { capitalize, formatPrice, cleanFirebaseUserObject, getAndCache, makeFnSortArray, orderByCriteria }

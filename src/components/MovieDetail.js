@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { Grid } from 'react-bootstrap'
+import { Grid, Thumbnail } from 'react-bootstrap'
 import Slider from 'react-slick'
 
 import { getMovieDetails, getUrlImage } from '../services/moviesApi'
-import { formatPrice } from '../utils'
+import { formatPrice, orderByCriteria } from '../utils'
 
 import './MovieDetail.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+const srcImgError = 'https://www.wallstreetotc.com/wp-content/uploads/2014/10/facebook-anonymous-app.jpg'
 
 const settingsSlider = {
   dots: true,
@@ -37,6 +39,8 @@ class MovieDetail extends Component {
     const imgPath = getUrlImage(poster_path)
     const yearRelease = release_date && release_date.replace(/([0-9]{4})-.*/, "$1");
     console.log({ credits, backdrop_path, budget, genres, original_title, overview, poster_path, production_companies, production_countries, release_date, revenue, runtime, tagline, title, vote_average, vote_count });
+    const jobOrderCriteria = ["Director", "Producer", "Story", "Screenplay", "Original Music Composer", "Director of Photography", "Art Direction"] 
+    const orderedCrew = credits && orderByCriteria(credits.crew, "job", jobOrderCriteria)
     return (
       <div>
         <div  style={ { 
@@ -73,11 +77,18 @@ class MovieDetail extends Component {
                 </p>
                 <h4>Crew</h4>
                 <div className="containerSlider">
-                  <Slider {...settingsSlider} >
+                  <Slider {...settingsSlider} autofocus>
                   {
-                    credits && credits.crew.slice(0,20).map( ({ profile_path, name, id, job }) => (
-                      <div key={id} className="item-block-img">
-                        <img src={ getUrlImage(profile_path, 45) } alt={name}/>
+                    orderedCrew && orderedCrew.slice(0,20).map( ({ profile_path, name, credit_id, job }) => (
+                      <div key={ credit_id } className="item-block-img">
+                        <Thumbnail 
+                          src={ getUrlImage(profile_path, 45) } 
+                          alt={name}
+                          onError={ e => { 
+                            console.log("error loading image");
+                            e.target.src = srcImgError 
+                          } }
+                        />
                         <strong>{ name }</strong>
                         <span>{ job }</span>
                       </div>
@@ -87,11 +98,18 @@ class MovieDetail extends Component {
                 </div>
                 <h4>Cast</h4>
                 <div className="containerSlider">
-                  <Slider {...settingsSlider} >
+                  <Slider {...settingsSlider} autofocus>
                   {
                     credits && credits.cast.slice(0,20).map( ({ profile_path, name, id, character }) => (
-                      <div key={id} className="item-block-img">
-                        <img src={ getUrlImage(profile_path, 45) } alt={name}/>
+                      <div key={ id } className="item-block-img">
+                        <Thumbnail 
+                          src={ getUrlImage(profile_path, 45) } 
+                          alt={name}
+                          onError={ e => { 
+                            console.log("error loading image");
+                            e.target.src = srcImgError 
+                          } }
+                        />
                         <strong>{ name }</strong>
                         <span>{ character }</span>
                       </div>
