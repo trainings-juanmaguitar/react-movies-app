@@ -11,7 +11,6 @@ function cleanFirebaseUserObject(user) {
   }, {...user})
 }
 
-
 const getAndCache = (function () {
   const cache = {}
   return (keyCache, url) => {

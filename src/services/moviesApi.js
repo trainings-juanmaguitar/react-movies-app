@@ -9,6 +9,10 @@ const getUrlBySection = (section, page) =>
 const getUrlSearch = (query, page) => 
   `${apiUrlBase}/search/movie?query=${query}&page=${page}&api_key=${apiKey}`
 
+const getUrlDetailsMovie = (idMovie) => 
+  `${apiUrlBase}/movie/${idMovie}?api_key=${apiKey}`
+
+const getUrlImage = (path, size=500) => `https://image.tmdb.org/t/p/w${size}${path}`
 
 function findMovies(query, page=1) {
   const url = getUrlSearch(query, page)
@@ -22,4 +26,10 @@ function getMoviesBySection(section, page=1) {
   return getAndCache(keyCache, url)
 }
 
-export { getMoviesBySection, findMovies }
+function getMovieDetails(idMovie) {
+  const url = getUrlDetailsMovie(idMovie)
+  const keyCache = `movie=${idMovie}`
+  return getAndCache(keyCache, url)
+}
+
+export { getMoviesBySection, getMovieDetails, findMovies, getUrlImage }

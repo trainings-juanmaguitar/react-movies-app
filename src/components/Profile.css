@@ -1,0 +1,11 @@
+
+.Profile__sidebar {
+  padding: 30px 15px;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #bbb;
+}
+
+.Profile__ListItem {
+  text-align: left;
+}

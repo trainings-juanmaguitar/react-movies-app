@@ -1,5 +1,8 @@
 import React from 'react';
 import { Thumbnail } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
+import { getUrlImage } from '../services/moviesApi'
 
 import './MoviesList.css'
 
@@ -13,7 +16,7 @@ const MoviesList = props => {
             const { id, title, poster_path, overview, release_date } = movie
             const yearRelease = release_date.replace(/([0-9]{4})-.*/, "$1");
             const shortDescription = overview.substring(0,100) + '...'
-            const urlImage = `https://image.tmdb.org/t/p/w500${poster_path}`
+            const urlImage = getUrlImage(poster_path)
             return (
               <Thumbnail 
                 key={ id } 
@@ -22,7 +25,7 @@ const MoviesList = props => {
                 className="MoviesList__thumbnail"
                 onError={ e => { e.target.src = srcImgError } }
               >
-                <h3>{ title } <small>{ yearRelease }</small></h3>
+                <h3><Link to={`/movie/${id}`}>{ title }</Link>  <small>{ yearRelease }</small></h3>
                 <p>{ shortDescription }</p>
               </Thumbnail>
             )

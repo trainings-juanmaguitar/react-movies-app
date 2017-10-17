@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import MoviesSection from './MoviesSection'
 import SearchResults from './SearchResults'
 import Profile from './Profile'
+import MovieDetail from './MovieDetail'
 
 import './Main.css'
 
@@ -12,9 +13,10 @@ const Main = mainProps => {
   return (
     <div className="Main">
       <Switch>
-        <Route exact path='/profile' component={ routeProps => (
+        <Route exact path='/profile' render={ routeProps => (
           <Profile user={ mainProps.user } { ...routeProps } />
         ) } />
+        <Route exact path='/movie/:idMovie' component={ MovieDetail } />
         <Route exact path='/search/:query' render={ routeProps => (
           <SearchResults addSearch={ mainProps.addSearch } { ...routeProps } />
         )} />

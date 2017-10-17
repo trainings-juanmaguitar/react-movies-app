@@ -9,7 +9,7 @@ const Profile = ({ user }) => {
       {
         user && 
         <Row>
-          <Col sm={2}>
+          <Col sm={3} className="Profile__sidebar">
             <div>
               <div>
                 <img
@@ -17,49 +17,9 @@ const Profile = ({ user }) => {
                   src={ user.photoURL }
                   alt="aa"
                 />
-                <ul className="list-unstyled">
-                  <li className="name">
-                    {user.displayName}
-                  </li>
-                  <li>
-                    <a href="#">{user.email}</a>
-                  </li>
-                </ul>
+                <h2>{user.displayName}</h2>
+                <p><a href={`mailto:{ user.email}`}>{user.email}</a></p>    
               </div>
-              <nav >
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="#">
-                      <span className="fa fa-user" /> Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span className="fa fa-cog" /> Settings
-                    </a>
-                  </li>
-                  <li className="active">
-                    <a href="#">
-                      <span className="fa fa-credit-card" /> Billing
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span className="fa fa-envelope" /> Messages
-                    </a>
-                  </li>
-                  <li>
-                    <a href="user-drive.html">
-                      <span className="fa fa-th" /> Drive
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span className="fa fa-clock-o" /> Reminders
-                    </a>
-                  </li>
-                </ul>
-              </nav>
             </div>
           </Col>
         </Row>
