@@ -18,20 +18,16 @@ function cleanFirebaseUserObject(user) {
 
 const getAndCache = (function () {
   const cache = {}
-  return (keyCache, url) => {
+  return async (keyCache, url) => {
     if (cache[keyCache]) {
       console.log('💾 from cache...');
-      return new Promise( (resolve, reject) => {
-        resolve(cache[keyCache])
-      })
+      return Promise.resolve(cache[keyCache])
     }
-    return axios.get(url)
-      .then(response => response.data )
-      .then(data => {
-        console.log('🔎 fresh request...');
-        cache[keyCache] = data 
-        return data
-      })
+    const { data } = await axios.get(url)
+    console.log('🔎 fresh request...');
+    cache[keyCache] = data 
+    return data
+
   }
 })()
 

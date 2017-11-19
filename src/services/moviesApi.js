@@ -34,31 +34,23 @@ function getMoviesBySection(section, page=1) {
   return getAndCache(keyCache, url)
 }
 
-function getMovieDetails(idMovie) {
-  const url = getUrlDetailsMovie(idMovie)
-  const keyCache = `movie=${idMovie}`
-  let movie = {}
-  return getAndCache(keyCache, url)
-          .then(movieDetails => {
-            movie = movieDetails
-            const { id } = movieDetails
-            const url = getUrlCreditsMovie(id)
-            const keyCache = `credits=${id}`
-            return getAndCache(keyCache, url)
-          })
-          .then( movieCredits => {
-            movie.credits = movieCredits
-            const logosPromisesRequest = movie.production_companies.map( ({ id }) => {
-              const url = getUrlDetailsCompany(id)
-              const keyCache = `company=${id}`
-              return getAndCache(keyCache, url)
-            })
-            return Promise.all(logosPromisesRequest)
-          })
-          .then( companiesDetails => {
-            movie.production_companies = companiesDetails
-            return movie
-          })
+async function getMovieDetails(idMovie) {
+  const urlDetails = getUrlDetailsMovie(idMovie)
+  const keyCacheDetails = `movie=${idMovie}`
+  let movie = await getAndCache(keyCacheDetails, urlDetails)
+  const { id } = movie
+  const urlCredits = getUrlCreditsMovie(id)
+  const keyCacheCredits = `credits=${id}`
+  const movieCredits = await getAndCache(keyCacheCredits, urlCredits)        
+  movie.credits = movieCredits
+  const logosPromisesRequest = movie.production_companies.map( ({ id }) => {
+    const url = getUrlDetailsCompany(id)
+    const keyCache = `company=${id}`
+    return getAndCache(keyCache, url)
+  })
+  const companiesDetails = await Promise.all(logosPromisesRequest)
+  movie.production_companies = companiesDetails
+  return movie
 }
 
 export { getMoviesBySection, getMovieDetails, findMovies, getUrlImage }

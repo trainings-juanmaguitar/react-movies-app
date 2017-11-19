@@ -49,7 +49,7 @@ class MovieDetail extends Component {
           backgroundPosition: "center center",
           height: "1100px",
           width: "100%",
-          filter: "sepia(1)",
+          filter: "blur(5px)",
           position: "absolute",
           zIndex: "-1"
         } }>
